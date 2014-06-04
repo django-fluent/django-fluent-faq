@@ -36,7 +36,6 @@ class FaqCategoryDetail(TranslatableSlugMixin, DetailView):
     Detail view for FAQ categories.
     """
     model = FaqCategory
-    slug_url_kwarg = 'cat_slug'
 
 
 class FaqQuestionDetail(TranslatableSlugMixin, DetailView):
