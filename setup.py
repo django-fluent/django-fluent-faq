@@ -31,7 +31,7 @@ def find_version(*parts):
 
 
 setup(
-    name='django-fluent-contents',
+    name='django-fluent-faq',
     version=find_version('fluent_faq', '__init__.py'),
     license='Apache License, Version 2.0',
 
