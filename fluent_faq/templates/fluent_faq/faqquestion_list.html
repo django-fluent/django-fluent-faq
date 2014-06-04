@@ -1,18 +1,24 @@
 {% extends "fluent_faq/base.html" %}
 {% load fluent_faq_tags i18n %}
 
+{% block title %}{% trans "FAQ" %}{% endblock %}
+
 {% block content %}
   {% if not categories %}
     {% trans "There are no questions in the FAQ yet." %}
   {% else %}
-    {% for category, questions in categories %}
-      <h2><a href="{{ category.url }}">{{ category.title }}</a></h2>
+    <section class="faq-category">
+      {% for category, questions in categories %}
+        <header>
+          <h3><a href="{{ category.url }}">{{ category.title }}</a></h3>
+        </header>
 
-      <ul>
-      {% for question in questions %}
-        <li><a href="{% get_faq_question_url question %}">{{ question.title }}</a></li>
+        <ul class="faq-questions">
+        {% for question in questions %}
+          <li><a href="{% get_faq_question_url question %}">{{ question.title }}</a></li>
+        {% endfor %}
+        </ul>
       {% endfor %}
-      </ul>
-    {% endfor %}
+    </section>
   {% endif %}
 {% endblock %}

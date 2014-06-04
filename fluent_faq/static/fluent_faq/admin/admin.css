@@ -8,11 +8,11 @@
 
 /* Unfortunately, can't filter language_column out before Django 1.6 */
 
-#changelist .translated table tbody td:nth-child(3) {
+#changelist table tbody td:nth-child(3) {
   border-left: 0;
 }
 
-#changelist .translated table thead th:nth-child(3) {
+#changelist table thead th:nth-child(3) {
   visibility: hidden;
   border-left: 0;
 }

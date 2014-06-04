@@ -21,6 +21,7 @@
 <p>The template needs to provide the following blocks:</p>
 <table>
     <tr><td><kbd>content</kbd></td><td>The block for the main content.</td></tr>
+    <tr><td><kbd>sidebar_content</kbd></td><td>The block for the sidebar content.</td></tr>
     <tr><td><kbd>title</kbd></td><td>The contents for the <code>&lt;title&gt;</code> tag.</td></tr>
     <tr><td><kbd>meta-description</kbd></td><td>The content for the <code>&lt;meta name="description"&gt;</code> tag.</td></tr>
     <tr><td><kbd>meta-keywords</kbd></td><td>The content for the <code>&lt;meta name="keywords"&gt;</code> tag.</td></tr>
@@ -32,6 +33,7 @@
 <p>The FAQ contents is displayed below:</p>
 
 {% block content %}{% endblock %}
+{% block sidebar_content %}{% endblock %}
 
 </body>
 </html>

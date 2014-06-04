@@ -1,14 +1,16 @@
-{% extends "fluent_faq/base.html" %}
+{% extends "fluent_faq/base_detail.html" %}
 {% load fluent_faq_tags i18n %}
 
 {% block content %}
   <h2>{{ object.title }}</h2>
+{% endblock %}
 
+{% block sidebar_content %}
   {% with questions=object.questions.all %}
     {% if not questions %}
       {% trans "There are no questions in this category yet." %}
     {% else %}
-      <ul>
+      <ul class="faq-questions">
       {% for question in questions %}
         <li><a href="{% get_faq_question_url question %}">{{ question.title }}</a></li>
       {% endfor %}

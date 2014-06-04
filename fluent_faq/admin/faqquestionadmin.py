@@ -6,6 +6,7 @@ class FaqQuestionAdmin(FaqBaseModelAdmin):
     """
     Admin interface for the FAQ Question model.
     """
+    list_display = ('title', 'language_column', 'category', 'modification_date', 'actions_column')
     list_filter = ('category',)
 
     FIELDSET_GENERAL = (None, {
@@ -17,6 +18,9 @@ class FaqQuestionAdmin(FaqBaseModelAdmin):
         FaqBaseModelAdmin.FIELDSET_PUBLICATION,
         FaqBaseModelAdmin.FIELDSET_SEO,
     )
+
+    def queryset(self, request):
+        return super(FaqQuestionAdmin, self).queryset(request).select_related('category')
 
 
 # Add all fields
