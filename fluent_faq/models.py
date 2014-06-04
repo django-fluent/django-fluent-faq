@@ -207,3 +207,16 @@ class FaqQuestion(FaqBaseModel):
             obj.similar_tags = result["n"]
             results.append(obj)
         return results
+
+
+def _register_anyurlfield_type():
+    try:
+        from any_urlfield.models import AnyUrlField
+        from any_urlfield.forms.widgets import SimpleRawIdWidget
+    except ImportError:
+        pass
+    else:
+        AnyUrlField.register_model(FaqQuestion, widget=SimpleRawIdWidget(FaqQuestion))
+
+if 'any_urlfield' in settings.INSTALLED_APPS:
+    _register_anyurlfield_type()
