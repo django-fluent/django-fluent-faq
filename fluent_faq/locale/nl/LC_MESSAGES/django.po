@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-04 18:42+0200\n"
+"PO-Revision-Date: 2012-08-28 23:47+0100\n"
+"Last-Translator: Diederik van der Boor <vdboor@edoburu.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: models.py:30
+msgid "keywords"
+msgstr ""
+
+#: models.py:30
+msgid "When this field is not filled in, the the tags will be used."
+msgstr ""
+
+#: models.py:31
+msgid "description"
+msgstr ""
+
+#: models.py:31
+msgid ""
+"When this field is not filled in, the contents or intro text will be used."
+msgstr ""
+
+#: models.py:34
+msgid "author"
+msgstr "auteur"
+
+#: models.py:35
+msgid "creation date"
+msgstr "aanmaak datum"
+
+#: models.py:36
+msgid "last modification"
+msgstr "laatste wijziging"
+
+#: models.py:81 models.py:113
+msgid "title"
+msgstr ""
+
+#: models.py:82 models.py:114
+msgid "slug"
+msgstr ""
+
+#: models.py:88
+msgid "FAQ Category"
+msgstr "FAQ Categoriën"
+
+#: models.py:89
+msgid "FAQ Categories"
+msgstr "FAQ Categoriën"
+
+#: models.py:116
+msgid "answer"
+msgstr "antwoord"
+
+#: models.py:120
+msgid "Category"
+msgstr "Categoriën"
+
+#: models.py:124
+msgid "Tags are used to find related questions"
+msgstr "Tags worden gebruikt om gerelateerde vragen te vinden"
+
+#: models.py:131 pagetypes/faqpage/templates/admin/faqpage/change_form.html:34
+msgid "FAQ Question"
+msgstr "FAQ Vraag"
+
+#: models.py:132 pagetypes/faqpage/templates/admin/faqpage/change_form.html:52
+msgid "FAQ Questions"
+msgstr "FAQ Vragen"
+
+#: admin/base.py:29
+msgid "The slug is not unique"
+msgstr "De slug is niet uniek"
+
+#: admin/base.py:56
+msgid "Publication settings"
+msgstr "Publicatievoorkeuren"
+
+#: admin/base.py:60
+msgid "SEO settings"
+msgstr ""
+
+#: admin/base.py:118
+#, fuzzy, python-brace-format
+msgid ""
+"The {object_name} can't be previewed yet, a '{page_type_name}' page needs to "
+"be created first."
+msgstr ""
+"De {object_name} kan nog niet bekeken worden, er moet eerst een "
+"'{page_type_name}' pagina aangemaakt worden."
+
+#: admin/base.py:161 templates/admin/fluent_faq/faqquestion/change_form.html:5
+msgid "View on site"
+msgstr "Bekijk op website"
+
+#: admin/base.py:177
+msgid "Actions"
+msgstr "Acties"
+
+#: pagetypes/faqpage/models.py:12
+msgid "FAQ module"
+msgstr "FAQ module"
+
+#: pagetypes/faqpage/models.py:13
+msgid "FAQ modules"
+msgstr "FAQ modules"
+
+#: pagetypes/faqpage/templates/admin/faqpage/change_form.html:27
+msgid "FAQ questions at this page"
+msgstr "FAQ vragen op deze pagina"
+
+#: pagetypes/faqpage/templates/admin/faqpage/change_form.html:35
+msgid "actions"
+msgstr "acties"
+
+#: templates/admin/fluent_faq/faqquestion/change_form.html:4
+msgid "History"
+msgstr "Geschiedenis"
+
+#: templates/fluent_faq/faqcategory_detail.html:11
+msgid "There are no questions in this category yet."
+msgstr "Er zijn nog geen vragen in deze categorie."
+
+#: templates/fluent_faq/faqquestion_list.html:4
+msgid "FAQ"
+msgstr ""
+
+#: templates/fluent_faq/faqquestion_list.html:8
+msgid "There are no questions in the FAQ yet."
+msgstr ""
+
+#: templates/fluent_faq/similar_questions.html:8
+msgid "Related questions"
+msgstr "Gerelateerde vragen"
