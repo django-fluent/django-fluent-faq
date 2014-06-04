@@ -1,0 +1,64 @@
+{% extends base_change_form_template %}
+{% comment %}
+
+  This template is automatically selected by django-fluent-pages for the "FaqPage" model.
+  It displays the associated blog entries which the current "FaqPage" model displays.
+
+{% endcomment %}
+{% load i18n static fluent_faq_admin_tags %}
+
+{% block extrahead %}{{ block.super }}
+    <style type="text/css">
+      #published-faqquestions .paginator {
+          margin: 0;
+          padding: 5px;  /* plus 5px from td */
+      }
+    </style>
+{% endblock %}
+
+{% block after_first_fieldset %}
+  {% get_static_prefix as STATIC_URL %}{# Can't expect Django project to use context processors #}
+
+  {% if change %}
+    <div class="inline-group" id="published-faqquestions">
+        <div class="tabular inline-related">
+            <fieldset class="module">
+                <h2>
+                    {% trans "FAQ questions at this page" %}
+                </h2>
+
+                {# TODO: when a site filters objects by overriding .published(), the objects here still have a link in the admin. #}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{% trans "Faq Question" %}</th>
+                            <th width="120">{% trans "actions" as t %}{{ t|title }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for faqquestion in original.questions.all %}
+                        <tr class="{% cycle 'row1' 'row2' %}">
+                            <td>
+                                <span class="inline_label">
+                                    <a href="{% url 'admin:faqpage_faqpage_change' faqquestion.id %}" target="_blank">{{ faqquestion }}</a>
+                                </span>
+                            </td>
+                            <td class="nowrap">{% actions_column faqquestion %}</td>
+                        </tr>
+                        {% empty %}
+                            <tr>
+                              <td>
+                                  <p class="paginator">
+                                      0 {% trans "Faq Questions" %}
+                                  </p>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+
+  {% endif %}
+
+{% endblock %}

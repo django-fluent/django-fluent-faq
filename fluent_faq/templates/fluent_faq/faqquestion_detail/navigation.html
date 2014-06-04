@@ -1,0 +1,17 @@
+{% load i18n fluent_faq_tags %}
+
+<div class="faq-navigation">
+
+  {% with similar_objects=object.similar_objects %}
+    {% if similar_objects %}
+      <div class="faq-related">
+        <h3>{% trans "Related questions" %}</h3>
+        <ul>
+          {% for faqquestion in similar_objects %}
+            <li><a href="{% get_faq_question_url faqquestion %}" title="{{ faqquestion.title }}" rel="bookmark">{{ faqquestion.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endwith %}
+</div>

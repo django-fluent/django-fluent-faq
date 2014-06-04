@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="{% block meta-keywords %}{% endblock %}" />
+    <meta name="description" content="{% block meta-description %}{% endblock %}" />
+    <title>{% block title %}{% endblock %} - No base template</title>
+
+    <meta property="og:type" content="{% block og-type %}website{% endblock %}" />
+    <meta property="og:description" content="{% block og-description %}{% endblock %}" />
+</head>
+<body>
+
+<h1>No base template is set for django-fluent-faq</h1>
+
+<p>To configure the blog base template, either:
+<ul>
+    <li>create a template named: <kbd>fluent_faq/base.html</kbd>.</li>
+    <li>set <kbd>FLUENT_FAQ_BASE_TEMPLATE</kbd> to the desired base template file.</li>
+</ul>
+<p>The template needs to provide the following blocks:</p>
+<table>
+    <tr><td><kbd>content</kbd></td><td>The block for the main content.</td></tr>
+    <tr><td><kbd>title</kbd></td><td>The contents for the <code>&lt;title&gt;</code> tag.</td></tr>
+    <tr><td><kbd>meta-description</kbd></td><td>The content for the <code>&lt;meta name="description"&gt;</code> tag.</td></tr>
+    <tr><td><kbd>meta-keywords</kbd></td><td>The content for the <code>&lt;meta name="keywords"&gt;</code> tag.</td></tr>
+    <tr><td><kbd>og-type</kbd></td><td>The content for the <code>&lt;meta property="og:type"&gt;</code> tag for Facebook (optional)</td></tr>
+    <tr><td><kbd>og-description</kbd></td><td>The content for the <code>&lt;meta property="og:type"&gt;</code> tag for Facebook (optional)</td></tr>
+</table>
+
+<hr/>
+<p>The FAQ contents is displayed below:</p>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

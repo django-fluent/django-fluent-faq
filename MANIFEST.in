@@ -1,0 +1,12 @@
+include AUTHORS
+include README.rst
+include LICENSE
+recursive-include fluent_faq/locale *
+recursive-include fluent_faq/templates *.html
+recursive-include fluent_faq/static *
+global-exclude .DS_Store
+global-exclude Thumbs.db
+global-exclude Desktop.ini
+global-exclude *.swp
+global-exclude *~
+global-exclude *.bak
