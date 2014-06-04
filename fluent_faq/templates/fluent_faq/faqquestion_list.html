@@ -15,7 +15,7 @@
 
         <ul class="faq-questions">
         {% for question in questions %}
-          <li><a href="{% get_faq_question_url question %}">{{ question.title }}</a></li>
+          <li><a href="{% get_faq_url question %}">{{ question.title }}</a></li>
         {% endfor %}
         </ul>
       {% endfor %}

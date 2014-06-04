@@ -13,8 +13,8 @@ if HAS_APP_URLS:
     from fluent_faq.pagetypes.faqpage.models import FaqPage
 
 
-@template_tag(register, 'get_faq_question_url')
-class GetFaqQuestionUrl(BaseAssignmentOrOutputNode):
+@template_tag(register, 'get_faq_url')
+class GetFaqUrl(BaseAssignmentOrOutputNode):
     """
     Get the URL of a FAQ question.
 
