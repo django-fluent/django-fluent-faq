@@ -40,7 +40,7 @@
                         <tr class="{% cycle 'row1' 'row2' %}">
                             <td>
                                 <span class="inline_label">
-                                    <a href="{% url 'admin:faqpage_faqpage_change' faqquestion.id %}" target="_blank">{{ faqquestion }}</a>
+                                    <a href="{% url 'admin:fluent_faq_faqquestion_change' faqquestion.id %}" target="_blank">{{ faqquestion }}</a>
                                 </span>
                             </td>
                             <td class="nowrap">{% actions_column faqquestion %}</td>
