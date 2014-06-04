@@ -1,5 +1,5 @@
-fluentcms-faq
-=============
+django-fluent-faq
+=================
 
 This Django application adds a FAQ engine to sites built with django-fluent_ CMS.
 
@@ -16,8 +16,8 @@ Installation
 
 First install the module, preferably in a virtual environment::
 
-    git clone https://github.com/edoburu/fluentcms-faq.git
-    cd fluentcms-faq
+    git clone https://github.com/edoburu/django-fluent-faq.git
+    cd django-fluent-faq
     pip install .
 
     # Install the plugins of fluent-contents that you use:
