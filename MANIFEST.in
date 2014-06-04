@@ -4,6 +4,7 @@ include LICENSE
 recursive-include fluent_faq/locale *
 recursive-include fluent_faq/templates *.html
 recursive-include fluent_faq/static *
+recursive-include fluent_faq/pagetypes/faqpage/templates *.html
 global-exclude .DS_Store
 global-exclude Thumbs.db
 global-exclude Desktop.ini
