@@ -2,14 +2,12 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.db import models
-from django.db.models import get_model
-from django.utils.translation import ugettext_lazy as _, pgettext
-from django.utils import six
-from fluent_faq.urlresolvers import faq_reverse
+from django.utils.translation import ugettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
 from fluent_contents.models import PlaceholderField, ContentItemRelation
-from fluent_faq import appsettings
+from fluent_faq.urlresolvers import faq_reverse
 from fluent_faq.managers import FaqQuestionManager, FaqCategoryManager
+
 
 
 # Optional tagging support
