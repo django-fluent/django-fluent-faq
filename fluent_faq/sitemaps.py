@@ -22,7 +22,7 @@ class FaqQuestionSitemap(Sitemap):
     """
     def items(self):
         if not _url_patterns_installed():
-            return None
+            return []
         return FaqQuestion.objects.published().select_related('category')
 
     def lastmod(self, question):
@@ -41,7 +41,7 @@ class FaqCategorySitemap(Sitemap):
     """
     def items(self):
         if not _url_patterns_installed():
-            return None
+            return []
         return FaqCategory.objects.published()
 
     def lastmod(self, category):
