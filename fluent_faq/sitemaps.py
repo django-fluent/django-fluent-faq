@@ -23,15 +23,15 @@ class FaqQuestionSitemap(Sitemap):
     def items(self):
         if not _url_patterns_installed():
             return None
-        return FaqQuestion.objects.published()
+        return FaqQuestion.objects.published().select_related('category')
 
-    def lastmod(self, category):
+    def lastmod(self, question):
         """Return the last modification of the object."""
-        return category.modification_date
+        return question.modification_date
 
-    def location(self, category):
+    def location(self, question):
         """Return url of an question."""
-        return faq_reverse('faqcategory_detail', kwargs={'slug': category.slug}, ignore_multiple=True)
+        return faq_reverse('faqquestion_detail', kwargs={'cat_slug': question.category.slug, 'slug': question.slug}, ignore_multiple=True)
 
 
 
