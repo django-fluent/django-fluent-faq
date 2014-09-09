@@ -82,6 +82,20 @@ Typically this includes:
 * running  ``./manage.py syncdb``
 
 
+Configuring allowed plugins
+---------------------------
+
+To limit which plugins for django-fluent-contents_ can be used in the FAQ answer, use::
+
+    FLUENT_CONTENTS_PLACEHOLDER_CONFIG = {
+        'faq_answer': {
+            'plugins': (
+                'TextPlugin', 'PicturePlugin', 'OEmbedPlugin', 'SharedContentPlugin', 'RawHtmlPlugin',
+            ),
+        },
+    }
+
+
 Configuring the templates
 -------------------------
 
