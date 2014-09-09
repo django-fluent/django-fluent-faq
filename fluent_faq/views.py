@@ -1,14 +1,25 @@
+from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 from django.views.generic import DetailView, ListView
 from fluent_faq.models import FaqCategory, FaqQuestion
 from parler.views import TranslatableSlugMixin
 
+if 'fluent_pages' in settings.INSTALLED_APPS:
+    # Optional integration with fluent-pages features
+    from fluent_pages.views import CurrentPageMixin
+else:
+    # Simulate basic features for multilingual improvements!
+    from parler.views import ViewUrlMixin
+    class CurrentPageMixin(ViewUrlMixin):
+        pass
 
-class FaqQuestionList(ListView):
+
+class FaqQuestionList(CurrentPageMixin, ListView):
     """
     List view for FAQ questions.
     """
     model = FaqQuestion
+    view_url_name = 'faqquestion_index'
 
     def get_queryset(self):
         return super(FaqQuestionList, self).get_queryset().select_related('category')
@@ -31,18 +42,20 @@ class FaqQuestionList(ListView):
         return context
 
 
-class FaqCategoryDetail(TranslatableSlugMixin, DetailView):
+class FaqCategoryDetail(CurrentPageMixin, TranslatableSlugMixin, DetailView):
     """
     Detail view for FAQ categories.
     """
     model = FaqCategory
+    view_url_name = 'faqcategory_detail'
 
 
-class FaqQuestionDetail(TranslatableSlugMixin, DetailView):
+class FaqQuestionDetail(CurrentPageMixin, TranslatableSlugMixin, DetailView):
     """
     Detail view for FAQ questions.
     """
     model = FaqQuestion
+    view_url_name = 'faqquestion_detail'
 
     def render_to_response(self, context, **response_kwargs):
         """
