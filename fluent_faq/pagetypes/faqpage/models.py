@@ -1,9 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
 from fluent_faq.models import FaqQuestion
-from fluent_pages.models import Page
+from fluent_pages.models import HtmlPage
 
 
-class FaqPage(Page):
+class FaqPage(HtmlPage):
     """
     The page root for FAQ questions.
     """
