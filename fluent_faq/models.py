@@ -1,25 +1,14 @@
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from fluent_faq import appsettings
 from parler.models import TranslatableModel, TranslatedFields
+from parler.utils.context import switch_language
 from fluent_contents.models import PlaceholderField, ContentItemRelation
 from fluent_faq.urlresolvers import faq_reverse
 from fluent_faq.managers import FaqQuestionManager, FaqCategoryManager
-
-
-
-# Optional tagging support
-from parler.utils.context import switch_language
-
-TaggableManager = None
-if 'taggit_autosuggest' in settings.INSTALLED_APPS:
-    from taggit_autosuggest.managers import TaggableManager
-elif 'taggit_autocomplete_modified' in settings.INSTALLED_APPS:
-    from taggit_autocomplete_modified.managers import TaggableManagerAutocomplete as TaggableManager
-elif 'taggit' in settings.INSTALLED_APPS:
-    from taggit.managers import TaggableManager
+from fluent_utils.softdeps.taggit import TagsMixin
 
 
 class FaqBaseModel(TranslatableModel):
@@ -97,7 +86,7 @@ class FaqCategory(FaqBaseModel):
 
 
 
-class FaqQuestion(FaqBaseModel):
+class FaqQuestion(TagsMixin, FaqBaseModel):
     """
     Category in the FAQ.
     """
@@ -119,12 +108,6 @@ class FaqQuestion(FaqBaseModel):
     # Organisation
     category = models.ForeignKey(FaqCategory, verbose_name=_("Category"), related_name='questions')
 
-    # Make association with tags optional.
-    if TaggableManager is not None:
-        tags = TaggableManager(blank=True, help_text=_("Tags are used to find related questions"))
-    else:
-        tags = None
-
     objects = FaqQuestionManager()
 
     class Meta:
@@ -143,70 +126,15 @@ class FaqQuestion(FaqBaseModel):
         # Return the link style, using the permalink style setting.
         return u'{0}{1}/'.format(self.category.get_relative_url(), self.slug)
 
-
     def similar_objects(self, num=None, **filters):
-        tags = self.tags
-        if not tags:
-            return []
+        """
+        Find similar objects using related tags.
+        """
+        #TODO: filter appsettings.FLUENT_FAQ_FILTER_SITE_ID:
+        #    filters.setdefault('parent_site', self.parent_site_id)
 
-        content_type = ContentType.objects.get_for_model(self.__class__)
-        filters['content_type'] = content_type
-
-        # can't filter, see
-        # - https://github.com/alex/django-taggit/issues/32
-        # - http://django-taggit.readthedocs.org/en/latest/api.html#TaggableManager.similar_objects
-        #
-        # Otherwise this would be possible:
-        # return tags.similar_objects(**filters)
-
-        lookup_kwargs = tags._lookup_kwargs()
-        lookup_keys = sorted(lookup_kwargs)
-        qs = tags.through.objects.values(*lookup_kwargs.keys())
-        qs = qs.annotate(n=models.Count('pk'))
-        qs = qs.exclude(**lookup_kwargs)
-        subq = tags.all()
-        qs = qs.filter(tag__in=list(subq))
-        qs = qs.order_by('-n')
-
-        # from https://github.com/alex/django-taggit/issues/32#issuecomment-1002491
-        if filters is not None:
-            qs = qs.filter(**filters)
-
-        if num is not None:
-            qs = qs[:num]
-
-        # Normal taggit code continues
-
-        # TODO: This all feels like a bit of a hack.
-        items = {}
-        if len(lookup_keys) == 1:
-            # Can we do this without a second query by using a select_related()
-            # somehow?
-            f = tags.through._meta.get_field_by_name(lookup_keys[0])[0]
-            objs = f.rel.to._default_manager.filter(**{
-                "%s__in" % f.rel.field_name: [r["content_object"] for r in qs]
-            })
-            for obj in objs:
-                items[(getattr(obj, f.rel.field_name),)] = obj
-        else:
-            preload = {}
-            for result in qs:
-                preload.setdefault(result['content_type'], set())
-                preload[result["content_type"]].add(result["object_id"])
-
-            for ct, obj_ids in preload.items():
-                ct = ContentType.objects.get_for_id(ct)
-                for obj in ct.model_class()._default_manager.filter(pk__in=obj_ids):
-                    items[(ct.pk, obj.pk)] = obj
-
-        results = []
-        for result in qs:
-            obj = items[
-                tuple(result[k] for k in lookup_keys)
-            ]
-            obj.similar_tags = result["n"]
-            results.append(obj)
-        return results
+        # FIXME: Using super() doesn't work, calling directly.
+        return TagsMixin.similar_objects(self, num=num, **filters)
 
 
 def _register_anyurlfield_type():

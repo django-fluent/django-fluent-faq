@@ -5,6 +5,7 @@ from django.core.urlresolvers import NoReverseMatch
 from django.utils.translation import ugettext, ugettext_lazy as _
 from fluent_faq import appsettings
 from fluent_contents.admin import PlaceholderFieldAdmin
+from fluent_utils.softdeps.fluent_pages import mixed_reverse
 from parler.admin import TranslatableAdmin
 from parler.forms import TranslatableModelForm
 from parler.models import TranslationDoesNotExist
@@ -134,7 +135,6 @@ class FaqBaseModelAdmin(TranslatableAdmin, PlaceholderFieldAdmin):
     def _reverse_faqpage_index(self, request, obj=None):
         # Internal method with "protected access" to handle translation differences.
         # This is only called when 'fluent_pages' is in the INSTALLED_APPS.
-        from fluent_pages.urlresolvers import mixed_reverse
         return mixed_reverse('faqquestion_index')
 
 

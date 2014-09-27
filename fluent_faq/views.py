@@ -1,17 +1,9 @@
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 from django.views.generic import DetailView, ListView
+from fluent_utils.softdeps.fluent_pages import CurrentPageMixin
 from fluent_faq.models import FaqCategory, FaqQuestion
 from parler.views import TranslatableSlugMixin
-
-if 'fluent_pages' in settings.INSTALLED_APPS:
-    # Optional integration with fluent-pages features
-    from fluent_pages.views import CurrentPageMixin
-else:
-    # Simulate basic features for multilingual improvements!
-    from parler.views import ViewUrlMixin
-    class CurrentPageMixin(ViewUrlMixin):
-        pass
 
 
 class FaqQuestionList(CurrentPageMixin, ListView):
