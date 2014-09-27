@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.urlresolvers import NoReverseMatch
 from django.utils.translation import ugettext, ugettext_lazy as _
 from fluent_faq import appsettings
-from fluent_pages.urlresolvers import PageTypeNotMounted, MultipleReverseMatch
 from fluent_contents.admin import PlaceholderFieldAdmin
 from parler.admin import TranslatableAdmin
 from parler.forms import TranslatableModelForm
@@ -111,10 +110,11 @@ class FaqBaseModelAdmin(TranslatableAdmin, PlaceholderFieldAdmin):
         # When the page is accessed via a pagetype, warn that the node can't be previewed yet.
         context['preview_error'] = ''
         if 'fluent_pages' in settings.INSTALLED_APPS:
-            from fluent_faq.pagetypes.faqpage.models import FaqPage
+            from fluent_pages.urlresolvers import PageTypeNotMounted, MultipleReverseMatch
             try:
                 self._reverse_faqpage_index(request, obj)
             except PageTypeNotMounted:
+                from fluent_faq.pagetypes.faqpage.models import FaqPage
                 context['preview_error'] = ugettext("The {object_name} can't be previewed yet, a '{page_type_name}' page needs to be created first.").format(object_name=self.model._meta.verbose_name, page_type_name=FaqPage._meta.verbose_name)
             except MultipleReverseMatch:
                 # When 'faqquestion_index is ambiguous (because there are multiple FAQ nodes in the fluent-pages tree),
