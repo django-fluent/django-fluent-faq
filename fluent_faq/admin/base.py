@@ -6,6 +6,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from fluent_faq import appsettings
 from fluent_contents.admin import PlaceholderFieldAdmin
 from fluent_utils.softdeps.fluent_pages import mixed_reverse
+from fluent_utils.dry.admin import MultiSiteAdminMixin
 from parler.admin import TranslatableAdmin
 from parler.forms import TranslatableModelForm
 from parler.models import TranslationDoesNotExist
@@ -32,10 +33,11 @@ class FaqBaseModelForm(TranslatableModelForm):
 
 
 
-class FaqBaseModelAdmin(TranslatableAdmin, PlaceholderFieldAdmin):
+class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderFieldAdmin):
     """
     Base admin for FAQ questions
     """
+    filter_site = appsettings.FLUENT_FAQ_FILTER_SITE_ID
     list_display = ('title', 'language_column', 'modification_date', 'actions_column')
     form = FaqBaseModelForm
     search_fields = ('translations__slug', 'translations__title')
@@ -77,16 +79,6 @@ class FaqBaseModelAdmin(TranslatableAdmin, PlaceholderFieldAdmin):
     def get_prepopulated_fields(self, request, obj=None):
         # Needed for django-parler
         return {'slug': ('title',),}
-
-
-    def queryset(self, request):
-        qs = super(FaqBaseModelAdmin, self).queryset(request)
-
-        # Admin only shows current site for now,
-        # until there is decent filtering for it.
-        if appsettings.FLUENT_FAQ_FILTER_SITE_ID:
-            qs = qs.filter(parent_site=settings.SITE_ID)
-        return qs
 
 
     def save_model(self, request, obj, form, change):
