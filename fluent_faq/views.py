@@ -33,6 +33,11 @@ class FaqQuestionList(CurrentPageMixin, ListView):
         context['categories'] = categories
         return context
 
+    def get_template_names(self):
+        names = super(FaqQuestionList, self).get_template_names()  # faqquestion_list.html
+        names.insert(0, "fluent_faq/index.html")
+        return names
+
 
 class FaqCategoryDetail(CurrentPageMixin, TranslatableSlugMixin, DetailView):
     """
