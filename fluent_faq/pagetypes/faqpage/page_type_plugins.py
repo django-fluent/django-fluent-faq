@@ -1,4 +1,4 @@
-from fluent_pages.admin import HtmlPageAdmin
+from fluent_pages.adminui import HtmlPageAdmin
 from fluent_pages.extensions import page_type_pool, PageTypePlugin
 from .models import FaqPage
 
