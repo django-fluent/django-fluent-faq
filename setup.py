@@ -44,6 +44,9 @@ setup(
     requires=[
         'Django (>=1.5)',
     ],
+    extras_require = {
+        'faqpage': ['django-fluent-pages'],
+    },
     description='A FAQ engine for Django Fluent CMS',
     long_description=read('README.rst'),
 
