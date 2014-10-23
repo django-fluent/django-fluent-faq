@@ -3,6 +3,7 @@ from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from fluent_faq import appsettings
+from parler.fields import TranslatedField
 from parler.models import TranslatableModel, TranslatedFields
 from parler.utils.context import switch_language
 from fluent_contents.models import PlaceholderField, ContentItemRelation
@@ -66,6 +67,7 @@ class FaqCategory(FaqBaseModel):
     # unfortunately, there isn't a good canonical version of it yet.
     order = models.PositiveIntegerField(db_index=True, blank=True, null=True)
 
+    title = TranslatedField(any_language=True)
     translations = TranslatedFields(
         title = models.CharField(_("title"), max_length=200),
         slug = models.SlugField(_("slug")),
@@ -79,6 +81,7 @@ class FaqCategory(FaqBaseModel):
         ordering = ('order', 'creation_date')
 
     def __unicode__(self):
+        # self.title is configured with any_language=True, so always returns a value.
         return self.title
 
     def get_relative_url(self):
@@ -98,6 +101,7 @@ class FaqQuestion(TagsMixin, FaqBaseModel):
     # unfortunately, there isn't a good canonical version of it yet.
     order = models.PositiveIntegerField(db_index=True, blank=True, null=True)
 
+    title = TranslatedField(any_language=True)
     translations = TranslatedFields(
         title = models.CharField(_("title"), max_length=200),
         slug = models.SlugField(_("slug")),
@@ -116,8 +120,8 @@ class FaqQuestion(TagsMixin, FaqBaseModel):
         ordering = ('order', 'creation_date')
 
     def __unicode__(self):
+        # self.title is configured with any_language=True, so always returns a value.
         return self.title
-
 
     def get_relative_url(self):
         """
