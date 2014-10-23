@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 from django.views.generic import DetailView, ListView
+from fluent_faq import appsettings
 from fluent_utils.softdeps.fluent_pages import CurrentPageMixin
 from fluent_faq.models import FaqCategory, FaqQuestion
 from parler.views import TranslatableSlugMixin
@@ -12,9 +13,13 @@ class FaqQuestionList(CurrentPageMixin, ListView):
     """
     model = FaqQuestion
     view_url_name = 'faqquestion_index'
+    prefetch_translations = False
 
     def get_queryset(self):
-        return super(FaqQuestionList, self).get_queryset().select_related('category').active_translations()
+        qs = super(FaqQuestionList, self).get_queryset().select_related('category').active_translations()
+        if self.prefetch_translations:
+            qs = qs.prefetch_related('translations')
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(FaqQuestionList, self).get_context_data(**kwargs)
@@ -39,7 +44,22 @@ class FaqQuestionList(CurrentPageMixin, ListView):
         return names
 
 
-class FaqCategoryDetail(CurrentPageMixin, TranslatableSlugMixin, DetailView):
+class BaseFaqDetailView(CurrentPageMixin, TranslatableSlugMixin, DetailView):
+    # Only relevant at the detail page, e.g. for a language switch menu.
+    prefetch_translations = appsettings.FLUENT_FAQ_PREFETCH_TRANSLATIONS
+
+    def get_queryset(self):
+        # Not filtering active_languages(), let TranslatableSlugMixin handle everything.
+        qs = super(BaseFaqDetailView, self).get_queryset()
+        if self.prefetch_translations:
+            qs = qs.prefetch_related('translations')
+        return qs
+
+    def get_language_choices(self):
+        return appsettings.FLUENT_FAQ_LANGUAGES.get_active_choices()
+
+
+class FaqCategoryDetail(BaseFaqDetailView):
     """
     Detail view for FAQ categories.
     """
@@ -47,7 +67,7 @@ class FaqCategoryDetail(CurrentPageMixin, TranslatableSlugMixin, DetailView):
     view_url_name = 'faqcategory_detail'
 
 
-class FaqQuestionDetail(CurrentPageMixin, TranslatableSlugMixin, DetailView):
+class FaqQuestionDetail(BaseFaqDetailView):
     """
     Detail view for FAQ questions.
     """

@@ -6,6 +6,9 @@ from parler.utils import normalize_language_code, is_supported_django_language
 # Advanced settings
 FLUENT_FAQ_FILTER_SITE_ID = getattr(settings, 'FLUENT_FAQ_FILTER_SITE_ID', True)
 
+# Performance settings
+FLUENT_FAQ_PREFETCH_TRANSLATIONS = getattr(settings, 'FLUENT_FAQ_PREFETCH_TRANSLATIONS', False)
+
 # Note: the default language setting is used during the migrations
 # Allow this module to have other settings, but default to the shared settings
 FLUENT_DEFAULT_LANGUAGE_CODE = getattr(settings, 'FLUENT_DEFAULT_LANGUAGE_CODE', parler_appsettings.PARLER_DEFAULT_LANGUAGE_CODE)
