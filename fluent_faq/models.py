@@ -87,6 +87,13 @@ class FaqCategory(FaqBaseModel):
     def get_relative_url(self):
         return u'{0}/'.format(self.slug)
 
+    @property
+    def faq_questions(self):
+        """
+        Fetch the active FAQ questions in this category.
+        """
+        return self.questions.active_translations()
+
 
 
 class FaqQuestion(TagsMixin, FaqBaseModel):
