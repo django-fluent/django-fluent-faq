@@ -23,7 +23,7 @@ class FaqQuestionSitemap(Sitemap):
     def items(self):
         if not _url_patterns_installed():
             return []
-        return FaqQuestion.objects.published().select_related('category')
+        return FaqQuestion.objects.published().select_related('category').active_translations()
 
     def lastmod(self, question):
         """Return the last modification of the object."""
@@ -42,7 +42,7 @@ class FaqCategorySitemap(Sitemap):
     def items(self):
         if not _url_patterns_installed():
             return []
-        return FaqCategory.objects.published()
+        return FaqCategory.objects.published().active_translations()
 
     def lastmod(self, category):
         """Return the last modification of the object."""

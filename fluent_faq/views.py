@@ -14,7 +14,7 @@ class FaqQuestionList(CurrentPageMixin, ListView):
     view_url_name = 'faqquestion_index'
 
     def get_queryset(self):
-        return super(FaqQuestionList, self).get_queryset().select_related('category')
+        return super(FaqQuestionList, self).get_queryset().select_related('category').active_translations()
 
     def get_context_data(self, **kwargs):
         context = super(FaqQuestionList, self).get_context_data(**kwargs)
