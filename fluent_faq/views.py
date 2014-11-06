@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.http import HttpResponsePermanentRedirect
 from django.views.generic import DetailView, ListView
 from fluent_faq import appsettings
@@ -7,7 +6,17 @@ from fluent_faq.models import FaqCategory, FaqQuestion
 from parler.views import TranslatableSlugMixin
 
 
-class FaqQuestionList(CurrentPageMixin, ListView):
+class BaseFaqMixin(CurrentPageMixin):
+    context_object_name = None
+    prefetch_translations = False
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseFaqMixin, self).get_context_data(**kwargs)
+        context['FLUENT_FAQ_BASE_TEMPLATE'] = appsettings.FLUENT_FAQ_BASE_TEMPLATE
+        return context
+
+
+class FaqQuestionList(BaseFaqMixin, ListView):
     """
     List view for FAQ questions.
     """
@@ -44,7 +53,7 @@ class FaqQuestionList(CurrentPageMixin, ListView):
         return names
 
 
-class BaseFaqDetailView(CurrentPageMixin, TranslatableSlugMixin, DetailView):
+class BaseFaqDetailView(BaseFaqMixin, TranslatableSlugMixin, DetailView):
     # Only relevant at the detail page, e.g. for a language switch menu.
     prefetch_translations = appsettings.FLUENT_FAQ_PREFETCH_TRANSLATIONS
 

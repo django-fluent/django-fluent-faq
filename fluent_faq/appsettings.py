@@ -5,6 +5,7 @@ from parler.utils import normalize_language_code, is_supported_django_language
 
 # Advanced settings
 FLUENT_FAQ_FILTER_SITE_ID = getattr(settings, 'FLUENT_FAQ_FILTER_SITE_ID', True)
+FLUENT_FAQ_BASE_TEMPLATE = getattr(settings, "FLUENT_FAQ_BASE_TEMPLATE", 'fluent_faq/base.html')
 
 # Performance settings
 FLUENT_FAQ_PREFETCH_TRANSLATIONS = getattr(settings, 'FLUENT_FAQ_PREFETCH_TRANSLATIONS', False)

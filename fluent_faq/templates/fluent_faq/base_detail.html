@@ -1,4 +1,4 @@
-{% extends "fluent_faq/base.html" %}
+{% extends "fluent_faq/base_internal.html" %}
 
 {% block title %}{{ object.title }}{% endblock %}
 {% block meta-keywords %}{% if object.meta_keywords %}{{ object.meta_keywords }}{% elif object.tags %}{{ object.tags.all|join:', ' }}{% else %}{{ block.super }}{% endif %}{% endblock %}
