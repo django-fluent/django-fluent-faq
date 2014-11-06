@@ -143,6 +143,6 @@ msgstr ""
 msgid "There are no questions in the FAQ yet."
 msgstr ""
 
-#: templates/fluent_faq/similar_questions.html:8
+#: templates/fluent_faq/partials/similar_questions.html:8
 msgid "Related questions"
 msgstr "Gerelateerde vragen"
