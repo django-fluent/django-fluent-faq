@@ -11,6 +11,12 @@ import sys
 if 'sdist' in sys.argv or 'develop' in sys.argv:
     try:
         os.chdir('fluent_faq')
+
+        from django.core.management.commands.compilemessages import Command
+        command = Command()
+        command.execute(stdout=sys.stderr, verbosity=1)
+    except ImportError:
+        # < Django 1.7
         from django.core.management.commands.compilemessages import compile_messages
         compile_messages(sys.stderr)
     finally:
@@ -38,14 +44,15 @@ setup(
     install_requires=[
         'django-fluent-contents>=1.0b1',
         'django-fluent-utils>=1.0',        # DRY utility code
-        'django-parler>=1.0b2',
+        'django-parler>=1.0',
         'django-tag-parser>=1.1',
     ],
     requires=[
         'Django (>=1.5)',
     ],
     extras_require = {
-        'faqpage': ['django-fluent-pages'],
+        'faqpage': ['django-fluent-pages>=0.9b4'],
+        'taggit': ['taggit', 'taggit-autosuggest'],
     },
     description='A FAQ engine for Django Fluent CMS',
     long_description=read('README.rst'),
