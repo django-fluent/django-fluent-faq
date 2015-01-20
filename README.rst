@@ -37,7 +37,9 @@ First install the module, preferably in a virtual environment::
 Configuration
 -------------
 
-Add the applications to ``settings.py``::
+Add the applications to ``settings.py``:
+
+.. code-block:: python
 
     INSTALLED_APPS += (
         # FAQ engine
@@ -62,7 +64,9 @@ Add the applications to ``settings.py``::
 Note that not all applications are required;
 tagging is optional, and so are the various ``fluent_contents.plugin.*`` packages.
 
-Include the apps in ``urls.py``::
+Include the apps in ``urls.py``:
+
+.. code-block:: python
 
     urlpatterns += patterns('',
         url(r'^admin/util/taggit_autocomplete_modified/', include('taggit_autocomplete_modified.urls')),
@@ -85,7 +89,9 @@ Typically this includes:
 Configuring allowed plugins
 ---------------------------
 
-To limit which plugins for django-fluent-contents_ can be used in the FAQ answer, use::
+To limit which plugins for django-fluent-contents_ can be used in the FAQ answer, use:
+
+.. code-block:: python
 
     FLUENT_CONTENTS_PLACEHOLDER_CONFIG = {
         'faq_answer': {
@@ -113,7 +119,9 @@ The base template needs to have the blocks:
 * ``og-description`` the OpenGraph description for Facebook (optional)
 
 The ``fluent_faq/base.html`` template could simply remap the block names to the site's ``base.html`` template.
-For example::
+For example:
+
+.. code-block:: jinja2
 
     {% extends "base.html" %}
 
@@ -135,7 +143,9 @@ Adding pages to the sitemap
 ---------------------------
 
 Optionally, the blog pages can be included in the sitemap.
-Add the following in ``urls.py``::
+Add the following in ``urls.py``:
+
+.. code-block:: python
 
     from fluent_faq.sitemaps import FaqQuestionSitemap, FaqCategorySitemap
 
@@ -152,13 +162,17 @@ Add the following in ``urls.py``::
 Integration with django-fluent-pages:
 -------------------------------------
 
-To integrate with the page types of django-fluent-pages_, don't include ``fluent_blogs.urls`` in the URLconf::
+To integrate with the page types of django-fluent-pages_, don't include ``fluent_blogs.urls`` in the URLconf:
+
+.. code-block:: python
 
     urlpatterns += patterns('',
         url(r'^admin/util/taggit_autocomplete_modified/', include('taggit_autocomplete_modified.urls')),
     )
 
-Instead, add a page type instead::
+Instead, add a page type instead:
+
+.. code-block:: python
 
     INSTALLED_APPS += (
         'fluent_pages',
