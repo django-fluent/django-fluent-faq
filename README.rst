@@ -21,7 +21,9 @@ Used applications:
 Installation
 ============
 
-First install the module, preferably in a virtual environment::
+First install the module, preferably in a virtual environment:
+
+.. code-block:: bash
 
     git clone https://github.com/edoburu/django-fluent-faq.git
     cd django-fluent-faq
@@ -73,7 +75,9 @@ Include the apps in ``urls.py``:
         url(r'^faq/', include('fluent_faq.urls')),
     )
 
-The database can be created afterwards::
+The database can be created afterwards:
+
+.. code-block:: bash
 
     ./manage.py syncdb
 
@@ -121,7 +125,7 @@ The base template needs to have the blocks:
 The ``fluent_faq/base.html`` template could simply remap the block names to the site's ``base.html`` template.
 For example:
 
-.. code-block:: jinja2
+.. code-block:: html+django
 
     {% extends "base.html" %}
 
