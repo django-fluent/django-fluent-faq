@@ -12,6 +12,10 @@ from fluent_faq.managers import FaqQuestionManager, FaqCategoryManager
 from fluent_utils.softdeps.taggit import TagsMixin
 
 
+def _get_current_site():
+    return Site.objects.get_current().pk
+
+
 class FaqBaseModel(TranslatableModel):
     """
     Shared functionality for published content.
@@ -25,7 +29,7 @@ class FaqBaseModel(TranslatableModel):
     creation_date = models.DateTimeField(_('creation date'), editable=False, auto_now_add=True)
     modification_date = models.DateTimeField(_('last modification'), editable=False, auto_now=True)
 
-    parent_site = models.ForeignKey(Site, editable=False, default=Site.objects.get_current)
+    parent_site = models.ForeignKey(Site, editable=False, default=_get_current_site)
 
     class Meta:
         abstract = True
