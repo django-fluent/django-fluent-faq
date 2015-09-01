@@ -116,7 +116,8 @@ The base template needs to have the blocks:
 
 * ``content`` - displays the main content
 * ``sidebar_content`` - displays the sidebar content
-* ``title`` - the ``<head>`` title fragment.
+* ``title`` - the title fragment to insert to the ``<title>`` tag.
+* ``meta-title`` - the full contents of the ``<title>`` tag.
 * ``meta-description`` - the ``value`` of the meta-description tag.
 * ``meta-keywords`` - the ``value`` for the meta-keywords tag.
 * ``og-type`` - the OpenGraph type for Facebook (optional)

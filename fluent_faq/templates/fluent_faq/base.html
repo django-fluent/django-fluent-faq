@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="keywords" content="{% block meta-keywords %}{% endblock %}" />
     <meta name="description" content="{% block meta-description %}{% endblock %}" />
-    <title>{% block title %}{% endblock %} - No base template</title>
+    <title>{% block meta-title %}{% block title %}{% endblock %} - No base template{% endblock %}</title>
 
     <meta property="og:type" content="{% block og-type %}website{% endblock %}" />
     <meta property="og:description" content="{% block og-description %}{% endblock %}" />
