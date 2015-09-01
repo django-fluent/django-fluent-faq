@@ -39,10 +39,10 @@ def find_version(*parts):
 setup(
     name='django-fluent-faq',
     version=find_version('fluent_faq', '__init__.py'),
-    license='Apache License, Version 2.0',
+    license='Apache 2.0',
 
     install_requires=[
-        'django-fluent-contents>=1.0b1',
+        'django-fluent-contents>=1.0',
         'django-fluent-utils>=1.0',        # DRY utility code
         'django-parler>=1.0',
         'django-tag-parser>=1.1',
@@ -51,7 +51,7 @@ setup(
         'Django (>=1.5)',
     ],
     extras_require = {
-        'faqpage': ['django-fluent-pages>=0.9b4'],
+        'faqpage': ['django-fluent-pages>=0.9'],
         'taggit': ['taggit', 'taggit-autosuggest'],
     },
     description='A FAQ engine for Django Fluent CMS',
