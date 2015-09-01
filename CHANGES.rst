@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 0.9.1 (2015-09-01)
+--------------------------
+
+* Fix ``fullheadtitle`` => ``meta-title`` template block name.
+* Added Django 1.7 migrations
+
+
 Version 0.9 (2015-01-20)
 ------------------------
 
