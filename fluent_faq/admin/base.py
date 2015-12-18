@@ -12,11 +12,11 @@ from parler.forms import TranslatableModelForm
 from parler.models import TranslationDoesNotExist
 
 
-
 class FaqBaseModelForm(TranslatableModelForm):
     """
     Base form for FAQ questions.
     """
+
     def clean_slug(self):
         """
         Test whether the slug is unique within the language domain.
@@ -30,7 +30,6 @@ class FaqBaseModelForm(TranslatableModelForm):
             raise ValidationError(_("The slug is not unique"))
 
         return slug
-
 
 
 class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderFieldAdmin):
@@ -75,18 +74,15 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
             'all': ('fluent_faq/admin/admin.css',)
         }
 
-
     def get_prepopulated_fields(self, request, obj=None):
         # Needed for django-parler
-        return {'slug': ('title',),}
-
+        return {'slug': ('title',), }
 
     def save_model(self, request, obj, form, change):
         # Automatically store the user in the author field.
         if not change:
             obj.author = request.user
         obj.save()
-
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         """
@@ -97,7 +93,6 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
             kwargs.update(overrides)
 
         return super(FaqBaseModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         # When the page is accessed via a pagetype, warn that the node can't be previewed yet.
@@ -123,17 +118,14 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
 
         return super(FaqBaseModelAdmin, self).render_change_form(request, context, add, change, form_url, obj)
 
-
     def _reverse_faqpage_index(self, request, obj=None):
         # Internal method with "protected access" to handle translation differences.
         # This is only called when 'fluent_pages' is in the INSTALLED_APPS.
         return mixed_reverse('faqquestion_index')
 
-
     @classmethod
     def get_actions_column(cls, faqquestion):
         return u' '.join(cls._actions_column_icons(faqquestion))
-
 
     @classmethod
     def _actions_column_icons(cls, object):
@@ -154,13 +146,11 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
                 )
         return actions
 
-
     @classmethod
     def can_preview_object(cls, object):
         """ Override whether the node can be previewed. """
         #return hasattr(faqquestion, 'get_absolute_url') and faqquestion.is_published
         return True
-
 
     def actions_column(self, faqquestion):
         return self.get_actions_column(faqquestion)

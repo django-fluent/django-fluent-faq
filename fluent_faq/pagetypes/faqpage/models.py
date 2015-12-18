@@ -19,7 +19,6 @@ class FaqPage(HtmlPage):
         """
         return FaqQuestion.objects.all()
 
-
     def get_object_url(self, object):
         """
         Return the URL of a FaqQuestion, relative to this page.

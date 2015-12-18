@@ -99,7 +99,6 @@ class FaqCategory(FaqBaseModel):
         return self.questions.active_translations()
 
 
-
 class FaqQuestion(TagsMixin, FaqBaseModel):
     """
     Category in the FAQ.

@@ -10,10 +10,12 @@ __all__ = (
     'FaqQuestionQuerySet',
 )
 
+
 class FaqBaseModelQuerySet(TranslatableQuerySet):
     """
     The QuerySet for FAQ models.
     """
+
     def parent_site(self, site):
         """
         Filter to the given site.

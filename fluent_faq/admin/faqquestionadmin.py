@@ -23,7 +23,7 @@ class FaqQuestionAdmin(FaqBaseModelAdmin):
     def get_queryset(self, request):
         return super(FaqQuestionAdmin, self).get_queryset(request).select_related('category')
 
-    if django.VERSION < (1,6):
+    if django.VERSION < (1, 6):
         queryset = get_queryset
 
 

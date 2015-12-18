@@ -20,6 +20,7 @@ class FaqQuestionSitemap(Sitemap):
     """
     Sitemap for FAQ questions
     """
+
     def items(self):
         if not _url_patterns_installed():
             return []
@@ -34,11 +35,11 @@ class FaqQuestionSitemap(Sitemap):
         return faq_reverse('faqquestion_detail', kwargs={'cat_slug': question.category.slug, 'slug': question.slug}, ignore_multiple=True)
 
 
-
 class FaqCategorySitemap(Sitemap):
     """
     Sitemap for FAQ categories.
     """
+
     def items(self):
         if not _url_patterns_installed():
             return []
