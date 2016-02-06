@@ -49,13 +49,13 @@ class FaqBaseModelManager(TranslatableManager):
         """
         Filter to the given site.
         """
-        return self.get_query_set().parent_site(site)
+        return self.all().parent_site(site)
 
     def published(self):
         """
         Return only published entries for the current site.
         """
-        return self.get_query_set().published()
+        return self.all().published()
 
 
 # Reserve the class names for extension later
