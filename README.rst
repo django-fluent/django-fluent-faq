@@ -82,7 +82,7 @@ The database can be created afterwards:
     ./manage.py syncdb
 
 In case additional plugins of django-fluent-contents_ are used, follow their
-`installation instructions <http://django-fluent-contents.readthedocs.org/en/latest/plugins/index.html>`_ as well.
+`installation instructions <https://django-fluent-contents.readthedocs.io/en/latest/plugins/index.html>`_ as well.
 Typically this includes:
 
 * adding the package name to ``INSTALLED_APPS``.
