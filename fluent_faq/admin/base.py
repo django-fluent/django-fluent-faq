@@ -2,6 +2,8 @@ from django.conf import settings
 from django.contrib.admin.widgets import AdminTextInputWidget, AdminTextareaWidget
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.urlresolvers import NoReverseMatch
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext, ugettext_lazy as _
 from fluent_faq import appsettings
 from fluent_contents.admin import PlaceholderFieldAdmin
@@ -125,7 +127,7 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
 
     @classmethod
     def get_actions_column(cls, faqquestion):
-        return u' '.join(cls._actions_column_icons(faqquestion))
+        return mark_safe(u' '.join(conditional_escape(a) for a in cls._actions_column_icons(faqquestion)))
 
     @classmethod
     def _actions_column_icons(cls, object):
@@ -140,10 +142,10 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
                 # In the second case, the edit page should still be reachable, and the "view on site" link will give an alert.
                 pass
             else:
-                actions.append(
+                actions.append(mark_safe(
                     u'<a href="{url}" title="{title}" target="_blank"><img src="{static}fluent_faq/img/admin/world.gif" width="16" height="16" alt="{title}" /></a>'.format(
                         url=url, title=_('View on site'), static=settings.STATIC_URL)
-                )
+                ))
         return actions
 
     @classmethod
