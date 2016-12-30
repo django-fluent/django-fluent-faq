@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import taggit_autosuggest.managers
 from django.conf import settings
 import fluent_faq.models
 
@@ -10,7 +9,6 @@ import fluent_faq.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('taggit', '0002_auto_20150616_2121'),
         ('sites', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
@@ -65,7 +63,6 @@ class Migration(migrations.Migration):
                 ('author', models.ForeignKey(editable=False, to=settings.AUTH_USER_MODEL, verbose_name='author')),
                 ('category', models.ForeignKey(related_name='questions', verbose_name='Category', to='fluent_faq.FaqCategory')),
                 ('parent_site', models.ForeignKey(default=fluent_faq.models._get_current_site, editable=False, to='sites.Site')),
-                ('tags', taggit_autosuggest.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', blank=True, help_text='A comma-separated list of tags.', verbose_name='Tags')),
             ],
             options={
                 'ordering': ('order', 'creation_date'),
