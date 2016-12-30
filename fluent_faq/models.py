@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.db import models
+from django.utils.six import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from fluent_faq import appsettings
 from parler.fields import TranslatedField
 from parler.models import TranslatableModel, TranslatedFields
 from parler.utils.context import switch_language
@@ -63,6 +63,7 @@ class FaqBaseModel(TranslatableModel):
         raise NotImplementedError("get_relative_url")
 
 
+@python_2_unicode_compatible
 class FaqCategory(FaqBaseModel):
     """
     Topic of the FAQ
@@ -84,7 +85,7 @@ class FaqCategory(FaqBaseModel):
         verbose_name_plural = _("FAQ Categories")
         ordering = ('order', 'creation_date')
 
-    def __unicode__(self):
+    def __str__(self):
         # self.title is configured with any_language=True, so always returns a value.
         return self.title
 
@@ -99,6 +100,7 @@ class FaqCategory(FaqBaseModel):
         return self.questions.active_translations()
 
 
+@python_2_unicode_compatible
 class FaqQuestion(TagsMixin, FaqBaseModel):
     """
     Category in the FAQ.
@@ -129,7 +131,7 @@ class FaqQuestion(TagsMixin, FaqBaseModel):
         verbose_name_plural = _("FAQ Questions")
         ordering = ('order', 'creation_date')
 
-    def __unicode__(self):
+    def __str__(self):
         # self.title is configured with any_language=True, so always returns a value.
         return self.title
 

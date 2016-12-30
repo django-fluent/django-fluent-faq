@@ -39,7 +39,7 @@ class FaqQuestionList(BaseFaqMixin, ListView):
             groups.setdefault(obj.category, []).append(obj)
 
         categories = []
-        for category in sorted(groups.iterkeys(), key=lambda c: (c.order, c.title)):
+        for category in sorted(groups.keys(), key=lambda c: (c.order, c.title)):
             categories.append(
                 (category, groups[category])
             )
