@@ -1,6 +1,15 @@
 Changelog
 =========
 
+Version 1.0 (2016-12-30)
+-------------------------
+
+* Added Python 3 support.
+* Added Django 1.10 support.
+* Fixed migration dependency on optional django-taggit-autosuggest_ package.
+* Fixed HTML code in ``FaqPage`` actions column.
+
+
 Version 0.9.2 (2016-02-06)
 --------------------------
 
