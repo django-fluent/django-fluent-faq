@@ -1,5 +1,5 @@
-from fluent_pages.adminui import HtmlPageAdmin
 from fluent_pages.extensions import page_type_pool, PageTypePlugin
+from .admin import FaqPageAdmin
 from .models import FaqPage
 
 
@@ -9,5 +9,5 @@ class FaqPagePlugin(PageTypePlugin):
     Plugin binding the FaqPage model as pagetype.
     """
     model = FaqPage
-    model_admin = HtmlPageAdmin
+    model_admin = FaqPageAdmin
     urls = 'fluent_faq.urls'
