@@ -23,8 +23,8 @@ class FaqQuestionAdmin(FaqBaseModelAdmin):
 
     fieldsets = (
         FIELDSET_GENERAL,
-        FaqBaseModelAdmin.FIELDSET_PUBLICATION,
         FaqBaseModelAdmin.FIELDSET_SEO,
+        FaqBaseModelAdmin.FIELDSET_PUBLICATION,
     )
 
     def get_queryset(self, request):

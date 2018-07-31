@@ -56,19 +56,19 @@ class FaqBaseModelAdmin(MultiSiteAdminMixin, TranslatableAdmin, PlaceholderField
     FIELDSET_GENERAL = (None, {
         'fields': ('title', 'slug',),
     })
-    FIELDSET_PUBLICATION = (_('Publication settings'), {
-        'fields': ('order',),
-        #'classes': ('collapse',),
-    })
     FIELDSET_SEO = (_('SEO settings'), {
         'fields': ('meta_keywords', 'meta_description'),
         'classes': ('collapse',),
     })
+    FIELDSET_PUBLICATION = (_('Publication settings'), {
+        'fields': ('order',),
+        #'classes': ('collapse',),
+    })
 
     fieldsets = (
         FIELDSET_GENERAL,
-        FIELDSET_PUBLICATION,
         FIELDSET_SEO,
+        FIELDSET_PUBLICATION,
     )
 
     class Media:
