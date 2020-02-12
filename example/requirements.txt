@@ -3,7 +3,7 @@
 # Instead, this requirements file contains all required elements for the demo:
 
 # Base apps
-Django == 1.11.27
+Django == 1.11.28
 Pillow == 6.2.0
 pytz == 2016.10
 
